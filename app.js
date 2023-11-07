@@ -12,7 +12,10 @@ app.use(cors());
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
-
+// 
+io.attach(server, {
+    path: '/socket.io'
+});
 
 const mensajeGuardado = [];
 
@@ -34,7 +37,7 @@ io.on('connection', (socket) => {
     });
 
     // Usuario comienza a escribir
-    socket.on('star typing', (userName) => {
+    socket.on('start typing', (userName) => {
         socket.broadcast.emit('typing', userName);
     });
 
