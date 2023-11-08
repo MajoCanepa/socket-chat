@@ -7,20 +7,18 @@ const io = new Server(server);
 const cors = require('cors');
 const PORT = 3000
 
+
 app.use(cors());
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
-// 
-io.attach(server, {
-    path: '/socket.io'
-});
+
 
 const mensajeGuardado = [];
 
 io.on('connection', (socket) => {
-    console.log('a user connected', socket.id);
+    console.log('usuario conectado', socket.id);
 
     // Enviar mensaje guardado en la memoria al cliente conectado
     mensajeGuardado.forEach((msg) => {
@@ -48,7 +46,7 @@ io.on('connection', (socket) => {
 
     // Cuando se desconecta
     socket.on('disconnect', () => {
-        console.log('user disconnected', socket.id);
+        console.log('usuario desconectado', socket.id);
     });
 
 });

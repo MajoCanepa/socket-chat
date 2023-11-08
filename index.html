@@ -35,7 +35,7 @@
             outline: none;
         }
 
-        #input2{
+        #input2 {
             border: none;
             padding: 0.5rem;
             /* flex-grow: 1;  */
@@ -91,11 +91,12 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
 
-        var socket = io();
-        var messages = document.getElementById('messages');
-        var form = document.getElementById('form');
-        var input = document.getElementById('input')
-        var input2 = document.getElementById('input2')
+        let socket = io();
+        let messages = document.getElementById('messages');
+        let form = document.getElementById('form');
+        let input = document.getElementById('input')
+        let input2 = document.getElementById('input2')
+        let typingIndicator = document.getElementById('typing-indicator');
 
 
         form.addEventListener('submit', function (e) {
@@ -110,14 +111,14 @@
         });
 
         socket.on('chat message', function (msg) {
-            var item = document.createElement('li');
+            let item = document.createElement('li');
             item.textContent = `${msg.name}: ${msg.msg}`;
             messages.appendChild(item);
             window.scrollTo(0, document.body.scrollHeight);
         });
 
-        var typing = false;
-        var timeout = undefined
+        let typing = false;
+        let timeout = undefined
 
         input.addEventListener('input', function () {
             if (!typing) {
@@ -140,7 +141,7 @@
         });
 
         socket.on('stop typing', function () {
-           document.getElementById('typing-indicator').textContent = '';
+            document.getElementById('typing-indicator').textContent = '';
         });
     </script>
 </body>
